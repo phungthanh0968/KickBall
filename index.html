@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Đá bóng</title>
+</head>
+<body>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			font-family: sans-serif;
+		}
+
+		body {
+			background-color: lightcyan;
+		}
+
+		#main {
+			position: relative;
+			width: 1200px;
+			height: 500px;
+			background-color: white;
+			margin: 30px auto 0;
+			overflow: hidden;
+		}
+
+		.ball {
+			position: absolute;
+			top: calc(100% - 300px);
+			left: calc(50% - 500px);
+			width: 1000px;
+			height: 1000px;
+			border-radius: 100%;
+			animation: movingBall linear 4s infinite;
+		}
+
+		.ball::before {
+			position: absolute;
+			content: "";
+			top: 0;
+			left: calc(50% - 20px);
+			width: 40px;
+			height: 40px;
+			border-radius: 100%;
+			background-image: url('./ball.png');
+			background-size: 40px 40px;
+		}
+
+		.person-1 {
+			position: absolute;
+			bottom: 120px;
+			left: 80px;
+			width: 70px;
+			height: 160px;
+			border-top-left-radius: 35px;
+			border-top-right-radius: 35px;
+		}
+
+		.person-1-body {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: darkviolet;
+			border-top-left-radius: 35px;
+			border-top-right-radius: 35px;
+			z-index: 20;
+		}
+
+		.person-1-body::before {
+			position: absolute;
+			content: "";
+			bottom: 0;
+			left: -20px;
+			border-width: 65px 10px;
+			border-style: solid;
+			border-color: transparent darkviolet darkviolet transparent;
+		}
+
+		.person-1-body::after {
+			position: absolute;
+			content: "";
+			bottom: 0;
+			right: -20px;
+			border-width: 65px 10px;
+			border-style: solid;
+			border-color: transparent transparent darkviolet darkviolet;
+		}
+
+		.person-1-head {
+			position: absolute;
+			top: -70px;
+			left: 0;
+			width: 70px;
+			height: 70px;
+			background-image: url('https://scontent.fhan5-11.fna.fbcdn.net/v/t1.6435-9/160271651_1889654164525432_101307570875384679_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=p_Eg_UN-gEQAX9-UOyL&tn=97_hj4ySWJHO-WmC&_nc_ht=scontent.fhan5-11.fna&oh=b65d9c108025f03d0680d4fc9fad4797&oe=61BBCE54');
+			background-size: 70px 70px;
+			border-radius: 100%;
+		}
+
+		.person-1-arm {
+			position: absolute;
+			top: -40px;
+			left: calc(50% - 15px);
+			width: 30px;
+			height: 140px;
+			border-width: 70px 0;
+			border-style: solid;
+			border-color: transparent transparent darkorange;
+			border-radius: 15px;
+			z-index: 30;
+		}
+
+		.person-1-arm::before {
+			position: absolute;
+			top: -15px;
+			left: 0;
+			content: "";
+			width: 30px;
+			height: 30px;
+			border-radius: 100%;
+			background-color: darkorange;
+		}
+
+		.person-1-arm::after {
+			position: absolute;
+			bottom: -70px;
+			left: 0;
+			content: "";
+			width: 70px;
+			height: 30px;
+			border-radius: 15px;
+			background-color: darkorange;
+			z-index: 10;
+		}
+
+		.person-1-leg-left {
+			position: absolute;
+			bottom: -110px;
+			left: calc(50% - 20px);
+			width: 40px;
+			height: 260px;
+			border-radius: 20px;
+			border-width: 130px 0;
+			border-style: solid;
+			border-color: transparent transparent darkorange;
+			z-index: 10;
+		}
+
+		.person-1-leg-left::before {
+			position: absolute;
+			content: "";
+			top: calc(50% - 20px);
+			left: 0;
+			width: 40px;
+			height: 40px;
+			border-radius: 100%;
+			background-color: darkorange;
+		}
+
+		.person-1-leg-right {
+			position: absolute;
+			bottom: -110px;
+			left: calc(50% - 20px);
+			width: 40px;
+			height: 260px;
+			border-radius: 20px;
+			border-width: 130px 0;
+			border-style: solid;
+			border-color: transparent transparent darkorange;
+			z-index: 30;
+			animation: kickBall1 ease .25s infinite;
+		}
+
+		.person-1-leg-right::before {
+			position: absolute;
+			content: "";
+			top: calc(50% - 20px);
+			left: 0;
+			width: 40px;
+			height: 40px;
+			border-radius: 100%;
+			background-color: darkorange;
+		}
+
+		.person-2 {
+			position: absolute;
+			bottom: 120px;
+			right: 80px;
+			width: 70px;
+			height: 160px;
+			border-top-left-radius: 35px;
+			border-top-right-radius: 35px;
+		}
+
+		.person-2-body {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: darkviolet;
+			border-top-left-radius: 35px;
+			border-top-right-radius: 35px;
+			z-index: 20;
+		}
+
+		.person-2-body::before {
+			position: absolute;
+			content: "";
+			bottom: 0;
+			left: -20px;
+			border-width: 65px 10px;
+			border-style: solid;
+			border-color: transparent darkviolet darkviolet transparent;
+		}
+
+		.person-2-body::after {
+			position: absolute;
+			content: "";
+			bottom: 0;
+			right: -20px;
+			border-width: 65px 10px;
+			border-style: solid;
+			border-color: transparent transparent darkviolet darkviolet;
+		}
+
+		.person-2-head {
+			position: absolute;
+			top: -70px;
+			left: 0;
+			width: 70px;
+			height: 70px;
+			background-image: url('https://scontent.fhan5-11.fna.fbcdn.net/v/t1.6435-9/101021720_1153269451691605_3762665125396348928_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=174925&_nc_ohc=y0MPC-mv4GkAX-DNxcI&tn=97_hj4ySWJHO-WmC&_nc_ht=scontent.fhan5-11.fna&oh=664a49c2d81841da9abc121c29b6ef18&oe=61BB7BD7');
+			background-size: 70px 70px;
+			border-radius: 100%;
+		}
+
+		.person-2-arm {
+			position: absolute;
+			top: -40px;
+			left: calc(50% - 15px);
+			width: 30px;
+			height: 140px;
+			border-width: 70px 0;
+			border-style: solid;
+			border-color: transparent transparent darkorange;
+			border-radius: 15px;
+			z-index: 30;
+		}
+
+		.person-2-arm::before {
+			position: absolute;
+			top: -15px;
+			left: 0;
+			content: "";
+			width: 30px;
+			height: 30px;
+			border-radius: 100%;
+			background-color: darkorange;
+		}
+
+		.person-2-arm::after {
+			position: absolute;
+			bottom: -70px;
+			right: 0;
+			content: "";
+			width: 70px;
+			height: 30px;
+			border-radius: 15px;
+			background-color: darkorange;
+			z-index: 10;
+		}
+
+		.person-2-leg-right {
+			position: absolute;
+			bottom: -110px;
+			left: calc(50% - 20px);
+			width: 40px;
+			height: 260px;
+			border-radius: 20px;
+			border-width: 130px 0;
+			border-style: solid;
+			border-color: transparent transparent darkorange;
+			z-index: 10;
+			animation: kickBall2 ease .25s infinite;
+		}
+
+		.person-2-leg-right::before {
+			position: absolute;
+			content: "";
+			top: calc(50% - 20px);
+			left: 0;
+			width: 40px;
+			height: 40px;
+			border-radius: 100%;
+			background-color: darkorange;
+		}
+
+		.person-2-leg-left {
+			position: absolute;
+			bottom: -110px;
+			left: calc(50% - 20px);
+			width: 40px;
+			height: 260px;
+			border-radius: 20px;
+			border-width: 130px 0;
+			border-style: solid;
+			border-color: transparent transparent darkorange;
+			z-index: 30;
+		}
+
+		.person-2-leg-left::before {
+			position: absolute;
+			content: "";
+			top: calc(50% - 20px);
+			left: 0;
+			width: 40px;
+			height: 40px;
+			border-radius: 100%;
+			background-color: darkorange;
+		}
+
+		@keyframes movingBall {
+			0% {
+				transform: rotate(-55deg);
+			}
+			50% {
+				transform: rotate(55deg);
+			}
+			100% {
+				transform: rotate(-55deg);
+			}
+		}
+		@keyframes kickBall1 {
+			0% {
+				transform: rotate(0);
+			}
+			50% {
+				transform: rotate(-40deg);
+			}
+			100% {
+				transform: rotate(0);
+			}
+		}
+		@keyframes kickBall2 {
+			0% {
+				transform: rotate(0);
+			}
+			50% {
+				transform: rotate(40deg);
+			}
+			100% {
+				transform: rotate(0);
+			}
+		}
+	</style>
+
+	<div id="main">
+		<div class="ball"></div>
+		<div class="person-1">
+			<div class="person-1-head"></div>
+			<div class="person-1-body"></div>
+			<div class="person-1-arm"></div>
+			<div class="person-1-leg-left"></div>
+			<div class="person-1-leg-right"></div>
+		</div>
+		<div class="person-2">
+			<div class="person-2-head"></div>
+			<div class="person-2-body"></div>
+			<div class="person-2-arm"></div>
+			<div class="person-2-leg-left"></div>
+			<div class="person-2-leg-right"></div>
+		</div>
+	</div>
+</body>
+</html>
