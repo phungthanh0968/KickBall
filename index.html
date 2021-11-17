@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test
+    </title>
+  </head>
+  <body>
+    <!-- Start your code here -->
+    <style type="text/css">
+      :root {
+  --length: 300px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: lightcyan;
+}
+#root {
+  position: relative;
+  width: var(--length);
+  height: var(--length);
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.bg-img{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('./img/img.jpg');
+  background-size: contain;
+  z-index: 5;
+  opacity: 0.6;
+}
+.clock-number {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 10px;
+  height: var(--length);
+  border-width: 20px 0;
+  border-style: solid;
+  border-color: #333;
+  background-color: transparent;
+}
+.clock-number.number-1-7 {
+  transform: translateX(-50%) rotate(30deg);
+}
+.clock-number.number-2-8 {
+  transform: translateX(-50%) rotate(60deg);
+}
+.clock-number.number-3-9 {
+  transform: translateX(-50%) rotate(90deg);
+}
+.clock-number.number-4-10{
+  transform: translateX(-50%) rotate(-60deg);
+}
+.clock-number.number-5-11 {
+  transform: translateX(-50%) rotate(-30deg);
+}
+.clock-number.number-6-12 {
+  width: 15px;
+  border-width: 25px 0 20px;
+  transform: translateX(-50%) rotate(0deg);
+}
+.clock-hands.hour-hand {
+  --width: 14px;
+  left: calc(50% - var(--width) / 2);
+  width: var(--width);
+  position: absolute;
+  top: 0;
+  height: var(--length);
+  border-width: 80px 0 120px;
+  border-style: solid;
+  border-color: transparent;
+  background-clip: content-box;
+  background-color: darkred;
+  z-index: 10;
+  animation: twirl linear 86400s infinite;
+}
+.clock-hands.minute-hand {
+  --width: 10px;
+  left: calc(50% - var(--width) / 2);
+  width: var(--width);
+  position: absolute;
+  top: 0;
+  height: var(--length);
+  border-width: 80px 0 120px;
+  border-style: solid;
+  border-color: transparent;
+  background-clip: content-box;
+  border-width: 60px 0 110px;
+  background-color: darkgreen;
+  z-index: 11;
+  animation: twirl linear 3600s infinite;
+}
+.clock-hands.seconds-hand {
+  --width: 6px;
+  left: calc(50% - var(--width) / 2);
+  width: var(--width);
+  position: absolute;
+  top: 0;
+  height: var(--length);
+  border-style: solid;
+  border-color: transparent;
+  background-clip: content-box;
+  border-width: 10px 0 100px;
+  background-color: black;
+  z-index: 12;
+  animation: twirl linear 60s infinite;
+}
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  transform: translate(-50%,-50%);
+  background-color: black;
+  border: 2px solid orange;
+  border-radius: 100%;
+  z-index: 200;
+}
+@keyframes twirl {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+    </style>
+    <div id="root">
+      <div class="bg-img">
+      </div>
+      <div class="clock-number number-1-7">
+      </div>
+      <div class="clock-number number-2-8">
+      </div>
+      <div class="clock-number number-3-9">
+      </div>
+      <div class="clock-number number-4-10">
+      </div>
+      <div class="clock-number number-5-11">
+      </div>
+      <div class="clock-number number-6-12">
+      </div>
+      <div class="clock-hands hour-hand">
+      </div>
+      <div class="clock-hands minute-hand">
+      </div>
+      <div class="clock-hands seconds-hand">
+      </div>
+      <div class="clock-center">
+      </div>
+    </div>
+    <!-- End your code here -->
+  </body>
+</html>
